@@ -1,6 +1,10 @@
 import product from "../models/product.js";
 export async function createProduct(req,res) {
 
+    if(req.user == null){
+        
+    }
+
     const product = new product(req.body)
 
     try{
