@@ -44,6 +44,9 @@ const productSchema = new mongoose.Schema({
         required : true,
         default : "cosmatics"
     }
-    
+
     
 })
+
+const product = mongoose.model("product", productSchema)
+export default product;
