@@ -2,7 +2,17 @@ import product from "../models/product.js";
 export async function createProduct(req,res) {
 
     if(req.user == null){
-        
+        res.status(403).json({
+            message : "Please login to create a product"
+        })
+        return;
+
+    }
+    if(req.user.role != "admin"){
+        res.status(403).json({
+            message : "you are not authorizesd tp create a product"
+        })
+        return;
     }
 
     const product = new product(req.body)
