@@ -2,7 +2,7 @@ import product from "../models/product.js";
 import { isAdmin } from "./userController.js";
 export async function createProduct(req,res) {
 
-    if(isAdmin(req)){
+    if( ! isAdmin(req)){
         return res.status(403).json({ message: "Access denied. Admins only." });
     }
 
@@ -29,5 +29,18 @@ export async function createProduct(req,res) {
 }
 
 export async function getProducts(req, res){
+    try {
+        if (isAdmin(req)) {
+            const products = await product.find();
+            return res.json(products);
+        }else{
+
+            const products = await product.find({ isAvailable: true});
+            return res.json(products);
+        }
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        return res.status(500).json({ message: "Failed to fetch products"});
+    }
     
 }
