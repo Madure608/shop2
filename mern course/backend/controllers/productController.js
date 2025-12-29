@@ -34,3 +34,7 @@ export async function createProduct(req,res) {
     
     
 }
+
+export async function getProducts(req, res){
+    
+}
