@@ -1,19 +1,12 @@
 import product from "../models/product.js";
+import { isAdmin } from "./userController.js";
 export async function createProduct(req,res) {
 
-    if(req.user == null){
-        res.status(403).json({
-            message : "Please login to create a product"
-        })
-        return;
+    if(isAdmin(req)){
+        return res.status(403).json({ message: "Access denied. Admins only." });
+    }
 
-    }
-    if(req.user.role != "admin"){
-        res.status(403).json({
-            message : "you are not authorizesd tp create a product"
-        })
-        return;
-    }
+    
 
     const product = new product(req.body)
 
