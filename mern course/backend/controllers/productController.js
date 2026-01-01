@@ -35,7 +35,7 @@ export async function getProducts(req, res){
             return res.json(products);
         }else{
 
-            const products = await product.find({ isAvailable: true});
+            const products = await product.find({ isAvailble: true});
             return res.json(products);
         }
     } catch (error) {
