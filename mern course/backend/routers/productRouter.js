@@ -26,5 +26,6 @@ productRouter.delete("/:productId", (req,res)=>{
     console.log("Delete request triggered")
 })
 
+
 export default productRouter;
 
