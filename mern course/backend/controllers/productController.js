@@ -1,3 +1,4 @@
+import { response } from "express";
 import product from "../models/product.js";
 import { isAdmin } from "./userController.js";
 export async function createProduct(req,res) {
@@ -52,6 +53,16 @@ export async function deleteProduct(req, res) {
     }
 
     try{
+
+        const productId = req.params.productId;
+
+        await product.deleteOne({
+            productId : productId
+        })
+
+        res.json({ message: "Product deleted successfully"});
+
+      
 
         
 
